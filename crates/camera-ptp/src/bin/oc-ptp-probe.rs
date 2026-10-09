@@ -31,7 +31,11 @@ fn list() {
         }
     };
     for dev in devices {
-        let fuji = if dev.vendor_id() == camera_ptp::FUJIFILM_VID { "  <- Fujifilm" } else { "" };
+        let fuji = if dev.vendor_id() == camera_ptp::FUJIFILM_VID {
+            "  <- Fujifilm"
+        } else {
+            ""
+        };
         println!(
             "{:04x}:{:04x}  {} {}{}",
             dev.vendor_id(),

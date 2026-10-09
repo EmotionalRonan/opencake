@@ -16,9 +16,15 @@ impl Caps {
     pub const LIVEVIEW: Caps = Caps(1 << 3);
     pub const EVENTS: Caps = Caps(1 << 4);
 
-    pub const fn empty() -> Self { Caps(0) }
-    pub const fn union(self, other: Caps) -> Self { Caps(self.0 | other.0) }
-    pub const fn contains(self, other: Caps) -> bool { self.0 & other.0 == other.0 }
+    pub const fn empty() -> Self {
+        Caps(0)
+    }
+    pub const fn union(self, other: Caps) -> Self {
+        Caps(self.0 | other.0)
+    }
+    pub const fn contains(self, other: Caps) -> bool {
+        self.0 & other.0 == other.0
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -72,4 +78,17 @@ pub trait CameraSession {
     fn capture(&mut self) -> Result<()>;
     fn download(&mut self, handle: u32) -> Result<DownloadedObject>;
     fn next_event(&mut self, timeout: Duration) -> Result<Option<CameraEvent>>;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn caps_union_and_contains() {
+        let c = Caps::REMOTE_CAPTURE.union(Caps::DOWNLOAD);
+        assert!(c.contains(Caps::REMOTE_CAPTURE));
+        assert!(c.contains(Caps::DOWNLOAD));
+        assert!(!c.contains(Caps::LIVEVIEW));
+    }
 }
