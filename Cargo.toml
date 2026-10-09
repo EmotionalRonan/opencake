@@ -1,0 +1,15 @@
+[workspace]
+resolver = "3"
+members = ["crates/camera-core", "crates/camera-ptp", "crates/oc-models"]
+
+[workspace.package]
+edition = "2024"
+license = "AGPL-3.0-or-later"
+repository = "https://github.com/EmotionalRonan/opencake"
+version = "0.0.1"
+
+[workspace.dependencies]
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+nusb = "0.1"

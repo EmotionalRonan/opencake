@@ -1,0 +1,11 @@
+[package]
+name = "oc-models"
+description = "AI model slot registry: model cards, recipes, backend selection (local ONNX / ComfyUI / HTTP)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_yaml.workspace = true
+thiserror.workspace = true

@@ -1,0 +1,16 @@
+schema: opencake/recipe@1
+id: studio-portrait-female
+steps:
+  - slot: face_detect
+  - slot: face_landmark
+  - slot: face_parse
+  - slot: skin_retouch
+    params: { strength: 0.6, texture: 0.4, style: neutral-grey }
+  - slot: blemish
+    params: { then: inpaint, keep_moles: true }
+  - op: liquify
+    params: { slim_face: 0.25, eye_size: 0.1, protect_background: true }
+  - slot: color_match
+    params: { reference: refs/sample-01.jpg, regions: [skin, hair, background] }
+apply_to: { person_class: [female, older_female] }
+fallback: { skin_retouch: shader-baseline }

@@ -1,0 +1,8 @@
+/target
+**/*.rs.bk
+node_modules/
+dist/
+*.onnx
+*.safetensors
+bench/datasets/
+.DS_Store

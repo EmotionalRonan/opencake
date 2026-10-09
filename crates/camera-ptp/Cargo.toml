@@ -1,0 +1,15 @@
+[package]
+name = "camera-ptp"
+description = "Native PTP camera driver (Linux nusb first; WPD, ImageCaptureCore, PTP/IP to follow)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+camera-core = { path = "../camera-core" }
+thiserror.workspace = true
+nusb.workspace = true
+
+[[bin]]
+name = "oc-ptp-probe"
+path = "src/bin/oc-ptp-probe.rs"

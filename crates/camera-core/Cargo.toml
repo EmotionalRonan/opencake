@@ -1,0 +1,9 @@
+[package]
+name = "camera-core"
+description = "CameraDriver trait, capabilities and events shared by all OpenCake camera drivers"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+thiserror.workspace = true

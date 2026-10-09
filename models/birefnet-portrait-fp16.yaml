@@ -1,0 +1,19 @@
+schema: opencake/model-card@1
+id: birefnet-portrait-fp16
+slot: matting
+license: { code: MIT, weights: MIT, tier: permissive, requires_ack: false }
+io:
+  inputs:  [{ name: input_image, dtype: float16, layout: NCHW, shape: [1,3,1024,1024],
+              color: RGB, range: [0,1], normalize: { mean: [0.485,0.456,0.406], std: [0.229,0.224,0.225] } }]
+  outputs: [{ name: output, kind: alpha, activation: sigmoid }]
+preprocess:  { roi: person_bbox, resize: { mode: letterbox } }
+postprocess: { resize_back: bilinear, refine: guided_filter }
+runtime:
+  backend: local-onnx
+  precision: [fp16, fp32]
+  ep_preference: [cuda, coreml, winml, dml, cpu]
+  vram_mb: { fp16: 3500 }
+  static_shapes: true
+performance: [{ device: "RTX 3060 12G", ep: cuda, latency_ms: null }]
+ui: { display_name_zh: 人像抠图（高精度）, default_for_slot: true }
+source: { files: [{ name: model.onnx, sha256: "TODO", mirrors: [huggingface, modelscope] }] }
