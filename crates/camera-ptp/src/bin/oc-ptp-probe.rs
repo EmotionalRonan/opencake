@@ -11,12 +11,13 @@ fn main() {
     let cmd = std::env::args().nth(1).unwrap_or_else(|| "list".into());
     match cmd.as_str() {
         "list" => list(),
+        "version" | "--version" => println!("oc-ptp-probe {}", env!("CARGO_PKG_VERSION")),
         "info" | "capture" | "props" => {
             eprintln!("`{cmd}` is not implemented yet. Track progress in the X-T30 issues.");
             std::process::exit(2);
         }
         _ => {
-            eprintln!("usage: oc-ptp-probe <list|info|capture|props>");
+            eprintln!("usage: oc-ptp-probe <list|info|capture|props|version>");
             std::process::exit(1);
         }
     }
